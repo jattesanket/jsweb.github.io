@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>College Info</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1 id="college-name">College Name</h1>
+    <p id="college-tagline">Basic college information and results</p>
+  </header>
+
+  <main class="container">
+    <section>
+      <h2>Overview</h2>
+      <p id="overview"></p>
+    </section>
+
+    <section>
+      <h2>Faculty</h2>
+      <ul id="faculty-list"></ul>
+    </section>
+
+    <section>
+      <h2>Branches & Student Counts</h2>
+      <table id="branches-table">
+        <thead>
+          <tr><th>Branch</th><th>Students</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <table id="results-table">
+        <thead>
+          <tr><th>Year</th><th>Branch</th><th>Students</th><th>Passed</th><th>Pass %</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Site generated with GitHub Pages — keep student data private</small>
+  </footer>
+
+  <script src="data.js"></script>
+  <script>
+    // Render the data provided in data.js (collegeData)
+    document.getElementById('college-name').textContent = collegeData.name;
+    document.getElementById('college-tagline').textContent = collegeData.tagline || '';
+    document.getElementById('overview').textContent = collegeData.description || '';
+
+    const facultyList = document.getElementById('faculty-list');
+    collegeData.faculty.forEach(f => {
+      const li = document.createElement('li');
+      li.textContent = f;
+      facultyList.appendChild(li);
+    });
+
+    const branchesTbody = document.querySelector('#branches-table tbody');
+    collegeData.branches.forEach(b => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${b.name}</td><td>${b.students}</td>`;
+      branchesTbody.appendChild(tr);
+    });
+
+    const resultsTbody = document.querySelector('#results-table tbody');
+    collegeData.results.forEach(r => {
+      const passPct = r.students ? Math.round((r.passed / r.students) * 100) : 0;
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${r.year}</td><td>${r.branch}</td><td>${r.students}</td><td>${r.passed}</td><td>${passPct}%</td>`;
+      resultsTbody.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
