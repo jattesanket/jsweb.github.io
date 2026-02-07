@@ -7,4 +7,4 @@ How to update:
 - Edit `index.html` or `styles.css` to change layout and styling.
 - Commit and push changes to `main` (or the branch configured for Pages).
 
-Published at: `https://jattesanket.github.io` (if repo named `jattesanket.github.io`)
+Published at: 'https://jattesanket.github.io/jsweb.github.io/'
